@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/solli/Documents/obliger/comphys/projects/project1/project_1/main.cpp
+iostream
+-
+fstream
+-
+math.h
+-
+armadillo
+-
+stdlib.h
+-
+

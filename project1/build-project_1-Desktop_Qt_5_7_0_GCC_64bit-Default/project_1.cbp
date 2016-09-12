@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="project_1" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="edit_cache">
+         <Option working_dir="/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 edit_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="project_1">
+         <Option output="/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/project_1" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/5" />
+            <Add directory="/usr/include/c++/5/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/5" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 project_1" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="project_1/fast">
+         <Option output="/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/project_1" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/5" />
+            <Add directory="/usr/include/c++/5/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/5" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 project_1/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/home/solli/Documents/obliger/comphys/projects/project1/project_1/main.cpp">
+         <Option target="project_1"/>
+      </Unit>
+      <Unit filename="/home/solli/Documents/obliger/comphys/projects/project1/project_1/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>
