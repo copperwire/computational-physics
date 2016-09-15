@@ -13,8 +13,10 @@ fstream
 -
 math.h
 -
-armadillo
--
 stdlib.h
+-
+string
+-
+iomanip
 -
 

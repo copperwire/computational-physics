@@ -1,12 +1,23 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
-#include <armadillo>
 #include <stdlib.h>
+#include <string>
+#include <iomanip>
+
 using namespace std;
 
-void non_special_method(double U [], int N){
+double funct(double x){
+    return 100*exp(-10 * x);
+}
+double exact(double x){
+    return 1.0-(1-exp(-10))*x-exp(-10*x);
+}
+
+
+void non_special_method(double U [], int exponent){
     char filename []  = "forw_back.txt";
+    int N = pow(10, exponent);
     double h = 1./(N+1);
     double hh = h*h;
 
@@ -58,40 +69,73 @@ void non_special_method(double U [], int N){
 }
 
 
-void special_method(double U [], int N){
-    char filename []  = "special_result.txt";
-    double h = 1./(N+1);
-    double hh = h*h;
+void special_method(double U [], int exponent){
+    for(int i = 1; i <= exponent; i++){
+        string filename  = "special_result";
+        string rel_err_file = "rel_err";
 
-    //M = midle diagonal
-    //F = function evaluation
-    //U = unknown function result
+        string new_string = filename + rel_err_file;
 
-    double* M = new double[N+2];
-    double* F = new double[N+2];
+        string argument = to_string(i);
+        filename.append(argument);
+        rel_err_file.append(argument);
 
-    M[1] = M[N] =  2.0;
-    F[1] = hh*100*exp(-10 * h);
+        int N = pow(10, i);
+        double h = 1./(N+1);
+        double hh = h*h;
 
-    for(int i = 2; i < N+2 ; i++){
-        M[i] = (i + 1.0)/((double) i);
-        F[i] = hh*100*exp(-10* i*h) + F[i-1]/M[i-1] ;
+        //M = midle diagonal
+        //F = function evaluation
+        //U = unknown function result
+
+        double* M = new double[N+2];
+        double* F = new double[N+2];
+        double* x = new double[N+2];
+
+
+        M[1] = M[N] =  2.0;
+        F[1] = hh*100*exp(-10 * h);
+
+        for (int i = 2; i< N+2; i++){
+            x[i] = i*h;
+        }
+
+
+        for(int i = 2; i < N+2 ; i++){
+            M[i] = (i + 1.0)/((double) i);
+            F[i] = hh*funct(x[i]) + F[i-1]/M[i-1] ;
+        }
+
+         ofstream datafile (filename.c_str());
+
+         datafile << U[N+1] << endl;
+
+         U[N] = F[N]/M[N];
+
+         datafile << U[N] << endl;
+
+         for(int i = N-1 ; i > 0; i--){
+             U[i] = (F[i] + U[i+1])/M[i];
+             datafile << U[i] << endl ;
+         }
+
+         datafile << U[0] ;
+
+
+         ofstream rel_file (rel_err_file.c_str());
+
+         for(int i = 2; i < N+2; i++){
+            double exact_val  = exact(x[i]);
+            double Relerr = fabs( (exact_val - U[i]) / exact_val);
+
+            rel_file << setw(15) << setprecision(8) << x[i];
+            rel_file << setw(15) << setprecision(8) << U[i];
+            rel_file << setw(15) << setprecision(8) << exact_val;
+            rel_file << setw(15) << setprecision(8) << log10(Relerr) << endl;
+         }
+
+
     }
-
-     ofstream datafile (filename);
-
-     datafile << U[N+1] << endl;
-
-     U[N] = F[N]/M[N];
-
-     datafile << U[N] << endl;
-
-     for(int i = N-1 ; i > 0; i--){
-         U[i] = (F[i] + U[i+1])/M[i];
-         datafile << U[i] << endl ;
-     }
-
-     datafile << U[0] ;
 
 }
 

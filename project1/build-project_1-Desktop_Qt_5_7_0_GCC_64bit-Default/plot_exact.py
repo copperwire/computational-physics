@@ -18,7 +18,7 @@ u[1:N-1] = exact(x)
 
 
 plt.plot(x, u[1:N-1], "r-", label = "Exact solution")
-#plt.plot(X, U, "b-x", label = "Forw + back subst")
+plt.plot(X, U, "b-x", label = "Forw + back subst")
 plt.plot(X, U_other, "g-x", label = "spec algo ")
 plt.legend()
 plt.show()

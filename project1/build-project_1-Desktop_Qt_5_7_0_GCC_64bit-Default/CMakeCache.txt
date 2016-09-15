@@ -14,6 +14,9 @@
 # EXTERNAL cache entries
 ########################
 
+//No help, variable specified on the command line.
+<UNSET>:PATH=<UNSET>
+
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
 
@@ -30,8 +33,8 @@ CMAKE_COLOR_MAKEFILE:BOOL=ON
 //No help, variable specified on the command line.
 CMAKE_CXX_COMPILER:STRING=/usr/bin/g++
 
-//Flags used by the compiler during all build types.
-CMAKE_CXX_FLAGS:STRING=
+//No help, variable specified on the command line.
+CMAKE_CXX_FLAGS:STRING=-std=c++11
 
 //Flags used by the compiler during debug builds.
 CMAKE_CXX_FLAGS_DEBUG:STRING=-g
