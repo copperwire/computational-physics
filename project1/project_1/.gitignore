@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
 
@@ -70,4 +71,7 @@ Thumbs.db
 # --------
 *.dll
 *.exe
+=======
+/data
+>>>>>>> 3592c6b989cca7265d89b4a7c801ae30ab3b5791
 
