@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.0.2, 2016-09-15T12:59:30. -->
+<!-- Written by QtCreator 4.0.2, 2016-09-16T17:06:58. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -115,6 +115,9 @@
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
     <valuelist type="QVariantList" key="CMake.Configuration">
      <value type="QString">CMAKE_BUILD_TYPE:STRING=Debug</value>
+     <value type="QString">CMAKE_CXX_COMPILER:STRING=%{Compiler:Executable}</value>
+     <value type="QString">CMAKE_CXX_FLAGS:STRING=-std=c++11</value>
+     <value type="QString">QT_QMAKE_EXECUTABLE:STRING=%{Qt:qmakeExecutable}</value>
     </valuelist>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Debug</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
@@ -344,7 +347,7 @@
      <value type="int">14</value>
     </valuelist>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">project_1</value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments">3</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments">5</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/solli/Documents/obliger/comphys/projects/project1/build-project_1-Desktop_Qt_5_7_0_GCC_64bit-Default</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
