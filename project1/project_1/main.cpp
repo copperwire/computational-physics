@@ -53,6 +53,8 @@ int non_special_method(int exponent){
          * The function needs to be EXACTLY 0 at boundary conditions DIRICHLET MOTHERFUCKER
         */
 
+        //pre algorithm set up and preparation
+
         x[1] = U[1] = F[1] = 0; x[N+1] = U[N+1] = F[N+1] = 0;
 
         for (int i = 1; i<N+2; i++){
@@ -177,6 +179,52 @@ time_write.close();
 return 0;
 }
 
+int lu_decomp(int exponent){
+
+    string time_file = "lu_time";
+    ofstream time_write (time_file.c_str());
+    time_write << "#num iterations, seconds/clocks_per_sec" <<endl;
+
+    for(int i = 1; i <= 5; i++){
+        int N = pow(10, i);
+        double h = 1./(N+1);
+        arma::mat L, U, P;
+        arma::mat A(N+1, N +1);
+        arma::vec f(N+1);
+        arma::vec x(N+1);
+
+        double start, stop;
+
+        for (int i = 0; i <= N ; i++){
+            f[i] = funct(i*h);
+        }
+
+        for(int i = 0; i < N+1 ;i++ ){
+            for(int j = 0; j < N+1 ; j++ ){
+                if(i == j){
+                    A(i,j) = 2.0 ;
+                    //cout <<A[i, j] <<endl;
+                }
+                else if(i == j-1  || i == j+1){
+                        A(i, j) = -1.0;
+                    }
+                else {};
+            //end of j
+            }
+
+        //end of i
+        }
+
+        start = clock();
+        arma::lu(L, U, P, A);
+        x = solve(trimatu(U), solve(trimatl(L), P*f));
+        stop = clock();
+
+        cout << N << endl;
+        time_write << N <<"  "<<(double (stop - start) / CLOCKS_PER_SEC) << endl ;
+    }
+    return 0;
+}
 
 int main(int argc, char *argv[]){
     int exponent = atoi(argv[1]);
@@ -185,6 +233,7 @@ int main(int argc, char *argv[]){
     double* U = new double[N+2];
     non_special_method(exponent);
     special_method(exponent);
+    lu_decomp(exponent);
 
     return 0;
 
