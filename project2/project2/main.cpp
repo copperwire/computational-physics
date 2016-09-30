@@ -3,21 +3,58 @@
 #include <armadillo>
 #include <string>
 #include <cmath>
+#include <stdlib.h>
 
 using namespace std;
 
-double V(double x){
-    return x*x;
+int test(arma::mat R, arma::mat A, arma::mat B, int N){
+
+    arma::vec v(N+1);
+    arma::vec w(N+1);
+    arma::vec diag(N+1);
+    arma::vec ref_eigval(N+1);
+
+
+    int rand_elem = rand() % N ;
+    int other_elem = rand() % N ;
+    v = R(rand_elem);
+    w = R(other_elem);
+
+    if(dot(v, w) > 1e-6 && rand_elem != other_elem){
+        cout<< "Orthogonality not preserved" << endl;
+        cout <<"dot prod" << "   " << dot(v, w) << "  " <<rand_elem << other_elem << endl;
+    }
+    else if( fabs((dot(v, w) -1)) > 1e-6 && rand_elem == other_elem){
+        cout<< "Orthogonality not preserved" << endl;
+        cout << "dot prod" << "   " << dot(v, w) << "  " <<rand_elem << other_elem << endl;
+    }
+
+    arma::eig_sym(ref_eigval, R, B);
+    diag = A.diag();
+    diag = arma::sort(diag);
+    ref_eigval = arma::sort(ref_eigval);
+
+    for(int i = 0; i<3 ; i++){
+        if(fabs(diag(i) - ref_eigval(i)) > 1e-4){
+            cout << "coherence with eig_sym breached" << endl;
+            cout << "value of difference:    " <<fabs(diag(i) - ref_eigval(i)) << endl;
+        }
+    }
+}
+
+double V(void*, double omega, double x){
+    return omega*omega*x*x;
+}
+double other_V(void*, double omega, double x){
+    return omega*omega*x*x  + 1/x ;
 }
 
 double max_elem(int* i, int* j, arma::mat A, int N){
     // matrix is symmetric - needs only check the upper or lower part.
     double max;
     for(int k = 0; k < N +1; k++ ){
-        for(int l = k+ 1; l < N +1; l++ ){
-
+        for(int l = k+1; l < N +1; l++ ){
             double a_kl = fabs(A(k, l));
-
             if(a_kl > max){
                 max = a_kl;
                 *i = k;
@@ -75,80 +112,100 @@ arma::mat sim_transform(int k, int l, arma::mat A, arma::mat R, int N){
     return A;
 }
 
+int do_method(int N, int rhomax, double (*potential)(void*, double, double), double epsilon, void* context){
+
+    double omega_vals [4] = {0.01, 0.5, 1, 5};
+    for(int y = 0; y<4 ; y++){
+
+        int num_iter = 0 ;
+        int max_iter = N*N*N;
+        double max = 1;
+
+        double h = rhomax /double (N+1);
+        int i = 0;
+        int j = 0;
+
+        double nondiagconst = - 1.0/(h*h) ;
+        double diagconst =  2.0/(h*h);
+
+        arma::vec rho(N+1);
+        arma::vec U(N+1);
+        arma::mat A(N+1, N+1);
+        arma::mat R(N+1, N+1); //eigenvec matrix
+        arma::vec diag(N+1);
+
+        A.zeros();
+        R.eye();
+        U.zeros();
+        rho.zeros();
+        diag.zeros();
+
+        for(int i = 0; i < N +1; i++){
+            //cout << "i, h" << i << " " << h << endl;
+            rho(i) = (i+1)*h;
+        }
+
+        double omega = omega_vals[y];
+        for(int i = 0; i < N + 1 ;i++ ){
+            for(int j = 0; j < N + 1 ; j++ ){
+                if(i == j){
+                    A(i,j) = diagconst + potential(context, omega, rho(i));
+                    //cout <<"element" <<A(i, j) << "index" << i << j << endl;
+                }
+                else if(i == j-1 || i == j+1){
+                    A(i, j) = nondiagconst ;
+                    //cout <<"element" << A[i, j] << "index" << i << j << endl;
+                    }
+                else{
+                    A(i, j) = 0.0 ;
+                }
+            //end of j
+            }
+
+        //end of i
+        }
+
+        arma::mat B(N+1, N+1);
+        B = A;
+
+        while (num_iter <= max_iter && fabs(max) > epsilon)
+        {
+            max = max_elem(&i, &j, A, N);
+            A = sim_transform(i, j, A, R,N);
+            num_iter++;
+        }
+
+        cout << "value of max matrix element | number of iterations | value of OMEGA" << "  " << max << "  " << num_iter << "  " << omega <<  endl;
+
+        cout << "-------------------------------------------------------------------------------------------------------" << endl;
+        diag = A.diag();
+        diag = arma::sort(diag);
+
+        test(R, A, B, N);
+
+        for(int i = 0; i<3 ; i++){
+            cout << diag(i) << endl;
+        }
+
+        /*  WRITING TO FILE GOES HERE
+         * R = matrix of eigenvectors NB UNSORTED (eigenstates of the hamiltonian)
+         * diag = Eigenvalues - sorted after line 177
+         * */
+        cout << "-------------------------------------------------------------------------------------------------------" << endl;
+        }
+     return 0;
+}
+
 int main(int argc, char *argv[])
 {
     double epsilon = 1e-8;
     double exponent = atoi(argv[1]);
     int rhomax = atoi(argv[2]);
+    int N = 20; //pow(10, exponent);
 
+    // needs to expand so do_method takes filename as argument
+    do_method(N, rhomax, &V, epsilon, 0);
+    do_method(N, rhomax, &other_V, epsilon, 0);
 
-    int N = 399; //pow(10, exponent);
-    int num_iter = 0 ;
-    int max_iter = 1e5;
-    double max = 1;
-
-    double h = rhomax /double (N);
-    int i = 0;
-    int j = 0;
-
-    double nondiagconst = - 1.0/(h*h) ;
-    double diagconst =  2.0/(h*h);
-
-    arma::vec rho(N+1);
-    arma::vec U(N+1);
-    arma::mat A(N+1, N+1);
-    arma::mat R(N+1, N+1); //eigenvec matrix
-    arma::vec diag(N+1);
-    arma::vec ref_eigval(N+1);
-
-    A.zeros();
-    R.eye();
-    U.zeros();
-    rho.zeros();
-
-    for(int i = 0; i < N +1; i++){
-        //cout << "i, h" << i << " " << h << endl;
-        rho(i) = i*h;
-    }
-
-    for(int i = 0; i < N + 1 ;i++ ){
-        for(int j = 0; j < N + 1 ; j++ ){
-            if(i == j){
-                A(i,j) = diagconst + V(rho[i]);
-                //cout <<"element" <<A(i, j) << "index" << i << j << endl;
-            }
-            else if(i == j-1 || i == j+1){
-                A(i, j) = nondiagconst ;
-                //cout <<"element" << A[i, j] << "index" << i << j << endl;
-                }
-            else{
-                A(i, j) = 0.0 ;
-            }
-        //end of j
-        }
-
-    //end of i
-    }
-
-    while (num_iter <= max_iter && fabs(max) > epsilon)
-    {
-        max = max_elem(&i, &j, A, N);
-        A = sim_transform(i, j, A, R,N);
-        num_iter++;
-    }
-    cout << "value of max matrix element | number of iterations" << "  " << max << "  " << num_iter << endl;
-
-    cout << "-------------------------------------------------------------------------------------------------------" << endl;
-    diag = A.diag();
-
-    //arma::eig_sym(ref_eigval, R, A);
-    diag = arma::sort(diag);
-    //ref_eigval = arma::sort(ref_eigval);
-    //ref_eigval.print();
-    //cout << "-------------------------------------------------------------------------------------------------------" << endl;
-    diag.print();
-
-
-
-    return 0;
 }
+
